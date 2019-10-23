@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TRANG CHỦ</title>
+	<meta charset="utf-8">
+	<!-- <link rel="stylesheet" type="text/css" href="index.css"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="footer.css">
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" href="#">Visualize</a>
+				
+			
+				<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithm</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown01">
+							<a class="dropdown-item" href="#">A-Star</a>
+							<a class="dropdown-item" href="#">Dijkstra</a>
+							<a class="dropdown-item" href="#">Breadth First Search</a>
+							<a class="dropdown-item" href="#">Depth First Search</a>
+						</div>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item" id="getStart" onclick="return getStart()">
+						<a class="nav-link" href="#">Get Start</a>
+					</li>
+					<li class="nav-item" id="getEnd" onclick="return getEnd()">
+						<a class="nav-link" href="#">Get End</a>
+					</li>
+					<li class="nav-item" id="start" onclick="return letGo()">
+						<a class="nav-link" href="#">Start</a>
+					</li>
+					</ul>
+				</div>
+		</nav>
+	</header>
+	<main role="main" class="container">
+			<div class="form-row align-items-center">
+					<div class="col-auto my-1">
+					  <label class="mr-sm-2" for="inlineFormCustomSelect">Hard</label>
+					  <select class="custom-select mr-sm-2" id="level">
+						<option selected>Hard Level</option>
+						<option value="0.3">Easy</option>
+						<option value="0.4">Medium</option>
+						<option value="0.6">Hard</option>
+					  </select>
+					</div>
+					<div class="col-auto my-1">
+						<label class="mr-sm-2" for="inlineFormCustomSelect">Algo</label>
+						<select class="custom-select mr-sm-2" id="algorithm">
+							<option selected>Algorithm</option>
+							<option value="1">A-Star</option>
+							<option value="2">Dijkstra</option>
+							<option value="3">Breadth First Search</option>
+							<option value="4">Depth First Search</option>
+						</select>
+					</div>
+					<div class="col-auto my-1" style="display: none;">
+					
+					</div>
+					<div class="col-auto my-1">
+						<label class="mr-sm-2" for="inlineFormCustomSelect">Rows</label>
+						<input type="text" class="form-control" id="number1" placeholder="Rows">
+					</div>
+					<div class="col-auto my-1">
+						<label class="mr-sm-2" for="inlineFormCustomSelect">Cols</label>
+						<input type="text" class="form-control" id="number2" placeholder="Cols">
+					</div>
+					<div class="col-auto my-1">
+					  <button type="submit" class="btn btn-primary" id="bt" type="submit" onclick="return init()">Submit</button>
+					</div>
+				</div>
+		<!-- <div class="jumbotron"> -->
+				<canvas id="canvas" width="0" height="0" ></canvas>
+		<!-- </div> -->
+	</main>
+	
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">Place sticky footer content here.</span>
+		</div>
+	</footer>
+</body>
+<!-- <script src="sketch.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="sketch.js"></script>
+<script src="dijkstra.js"></script>
+<script src="bfs.js"></script> 
+<script src="dfs.js"></script>
+</html>

@@ -1,0 +1,10 @@
+.col-auto my-1 {
+    display: inline !important;
+}
+canvas{
+    margin: auto;
+    display: block;
+}
+body{
+    background-color: #E9ECEF;
+}

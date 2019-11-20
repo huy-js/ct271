@@ -9,6 +9,7 @@ var end;
 var w, h;
 var path = [];
 
+
 function selected() {
     var selector = document.getElementById('level');
     var value = selector[selector.selectedIndex].value;
@@ -75,6 +76,7 @@ function Spot(i ,j){
 }
 
 function createMap(){
+    
     cols = document.getElementById("number1").value;
     rows = document.getElementById("number2").value;
     var i ,j;
@@ -101,12 +103,12 @@ function createPath() {
         path.push(temp.previous);
         temp = temp.previous;
     }
-    console.log(path);
+    // console.log(path);
 
     for( var i = path.length-1 ; i >= 0; i-- ){
         a = path[i];
         if(a!== start && a!== end){
-            console.log(a);
+            // console.log(a);
             ctx.fillStyle = "#F7FF61";
             ctx.fillRect(a.x*w, a.y*h, w-1, h-1);
         } 
@@ -134,8 +136,6 @@ function getStart(){
     }
     canvas1.addEventListener("click", myFunction, false);
 
-
-
     //Get Mouse Position
     function getMousePos(canvas1, evt) {
         var rect = canvas1.getBoundingClientRect();
@@ -145,14 +145,6 @@ function getStart(){
         };
     }
 }
-
-// function removeHandler() {
-//     var canvas1 = document.getElementById("canvas");
-//     canvas1.removeEventListener("click",getStart.myFunction());
-
-// }
-
-
 
 function getEnd(){
     var canvas1 = document.getElementById("canvas");
@@ -189,6 +181,8 @@ function drawMap(){
     ctx.fillStyle = "#AAD5FA";
     ctx.fillRect( 0, 0, width, height );
 
+    console.log(grid);
+
     for(var i=0;i< cols; i++){
         for(var j=0;j< rows; j++){
             switch( grid[i][j].wall ) {
@@ -198,12 +192,27 @@ function drawMap(){
             ctx.fillRect(i*w,j*h, w-1, h-1 );
         }
     }
+}
 
+function reDrawMap(){
+    w = width / cols; //do lon cua o
+    h = height / rows; //do lon cua o
+    ctx.fillStyle = "#AAD5FA";
+    ctx.fillRect( 0, 0, width, height );
+
+    // console.log(grid);
+
+    for(var i=0;i< cols; i++){
+        for(var j=0;j< rows; j++){
+            ctx.fillStyle = "#FFF"; 
+            ctx.fillRect(i*w,j*h, w-1, h-1 );
+        }
+    }
 }
 
 
 function drawMap1(){
-    console.log(openSet);
+    // console.log(openSet);
 
     for( var i = 0; i < openSet.length; i++ ) {
         a = openSet[i];
@@ -252,8 +261,6 @@ function solveMap1(){
 
     drawMap1();
 
-    console.log(start, end);
-
 
     if(openSet.length > 0){
         var winner = 0;
@@ -300,7 +307,6 @@ function solveMap1(){
 
             }
         }
-        console.log(current);
 
 
     }else{
@@ -314,6 +320,7 @@ function solveMap1(){
 function init(){
     width = 450;
     height = 450;
+    document.getElementById("myCanvas").innerHTML = '<canvas id="canvas" width="0" height="0" ></canvas>';
 
     document.getElementById("canvas").setAttribute("width",width);
     document.getElementById("canvas").setAttribute("height",height);
@@ -323,16 +330,11 @@ function init(){
 
     createMap();
 
-    console.log(start);
-    console.log(end);
-
     drawMap();
 
 }
 
 function letGo(){
-    console.log(start);
-    console.log(end);
     start.wall = false;
     end.wall = false;
     openSet.push(start);
@@ -364,4 +366,39 @@ function hide() {
         el2.style.display = 'none';
         el3.style.display = 'none';
         el4.style.display = 'none';
+}
+
+function reset(){
+    document.getElementById("number1").value = null;
+    document.getElementById("number2").value = null;
+    document.getElementById("algorithm").selectedIndex = "0";
+    document.getElementById("level").selectedIndex = "0";
+    var canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    ctx.clearRect( 0, 0, width, height );
+
+    cols = document.getElementById("number1").value;
+    rows = document.getElementById("number2").value;
+
+    for(var i=0;i< cols; i++){
+        for(var j=0;j< rows; j++){
+            ctx.clearRect(i*w,j*h, w-1, h-1 );
+        }
+    }
+    // reDrawMap();
+    $("#canvas").empty();
+    grid = new Array(cols);
+    var i ,j;
+    for(i=0;i< cols; i++){
+        grid[i] = new Array(rows);
+    }
+
+    for(i=0;i< cols; i++){
+        for(j=0;j< rows; j++){
+            grid[i][j] = 0;
+        }
+    }
+    openSet = [];
+    closedSet = [];
+    path=[];
 }

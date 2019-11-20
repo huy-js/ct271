@@ -18,7 +18,7 @@
 				<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
 					<ul class="navbar-nav mr-auto">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithm</a>
+						<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithm</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown01">
 							<a class="dropdown-item" href="#">A-Star</a>
 							<a class="dropdown-item" href="#">Dijkstra</a>
@@ -77,9 +77,14 @@
 					<div class="col-auto my-1">
 					  <button type="submit" class="btn btn-primary" id="bt" type="submit" onclick="return init()">Submit</button>
 					</div>
+					<div class="col-auto my-1">
+						<button class="btn btn-danger" id="reset" type="reset" onclick="return reset()">Reset</button>
+					</div>
 				</div>
 		<!-- <div class="jumbotron"> -->
-				<canvas id="canvas" width="0" height="0" ></canvas>
+				<div id="myCanvas">
+					<!-- <canvas id="canvas" width="0" height="0" ></canvas> -->
+				</div>
 		<!-- </div> -->
 	</main>
 	

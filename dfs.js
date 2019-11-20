@@ -8,11 +8,11 @@ function dfs(){
     // #OpenSet la nhung nut da duyet
     if(openSet.length > 0){
         var winner = 0;
-        // for(var i = 0; i<openSet.length; i++){
-        //     if(openSet[i].f < openSet[winner].f ){
-        //         winner = i;
-        //     }
-        // }
+        for(var i = 0; i<openSet.length; i++){
+            if(openSet[i].f < openSet[winner].f ){
+                winner = i;
+            }
+        }
 
         var current = openSet[openSet.length-1];
 

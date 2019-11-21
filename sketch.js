@@ -15,6 +15,15 @@ function selected() {
     return value;
 }
 
+function astar(){
+    var x = document.getElementById("algorithm").value;
+    if(parseInt(x) === 1){
+        document.getElementById("astar").style.display = "";
+    }else{
+        document.getElementById("astar").style.display = "none";
+    }
+}
+
 function algorithm() {
     var selector = document.getElementById('algorithm');
     var value = selector[selector.selectedIndex].value;
@@ -364,7 +373,12 @@ function solveMap1(){
             }
 
             if(newPath){
-                neighbor.h = heuristic(neighbor, end);
+                var x = parseInt(document.getElementById("astar1").value);
+                switch(x){
+                    case 1: neighbor.h = heuristic(neighbor, end); break;
+                    case 2: neighbor.h = heuristic1(neighbor, end); break;
+                    case 3: neighbor.h = heuristic2(neighbor, end); break;
+                }
                 // console.log("Heuristic", neighbor.g, neighbor.h, "\n");
                 neighbor.f = neighbor.g + neighbor.h;
                 neighbor.previous = current;

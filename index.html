@@ -11,21 +11,11 @@
 
 <body>
 	<header>
-		<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+		<nav class="navbar navbar-expand fixed-top navbar-dark bg-dark">
 				<a class="navbar-brand" href="index.html">Visualize</a>
 				
-			
 				<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-					<ul class="navbar-nav mr-auto">
-					<!-- <li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithm</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown01">
-							<a class="dropdown-item" href="#">A-Star</a>
-							<a class="dropdown-item" href="#">Dijkstra</a>
-							<a class="dropdown-item" href="#">Breadth First Search</a>
-							<a class="dropdown-item" href="#">Depth First Search</a>
-						</div>
-					</li> -->
+					<ul class="navbar-nav">
 					<li class="nav-item active">
 						<a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
 					</li>
@@ -51,17 +41,17 @@
 	<main role="main" class="container">
 			<div class="form-row align-items-center">
 					<div class="col-auto my-1">
-					  <label class="mr-sm-2" for="inlineFormCustomSelect">Hard</label>
-					  <select class="custom-select mr-sm-2" id="level">
+					  <label class="mr-sm-1" for="inlineFormCustomSelect">Hard</label>
+					  <select class="custom-select mr-sm-1" id="level">
 						<option selected>Hard Level</option>
 						<option value="0.3">Easy</option>
 						<option value="0.4">Medium</option>
 						<option value="0.6">Hard</option>
 					  </select>
 					</div>
-					<div class="col-auto my-1">
-						<label class="mr-sm-2" for="inlineFormCustomSelect">Algo</label>
-						<select class="custom-select mr-sm-2" id="algorithm">
+					<div class="col-auto my-1" onchange="astar()">
+						<label class="mr-sm-1" for="inlineFormCustomSelect">Algo</label>
+						<select class="custom-select mr-sm-1" id="algorithm">
 							<option selected>Algorithm</option>
 							<option value="1">A-Star</option>
 							<option value="2">Dijkstra</option>
@@ -69,15 +59,21 @@
 							<option value="4">Depth First Search</option>
 						</select>
 					</div>
-					<div class="col-auto my-1" style="display: none;">
-					
+					<div id="astar" class="col-auto my-1" style="display: none;">
+						<label class="mr-sm-1" for="inlineFormCustomSelect">Heuristic</label>
+						<select class="custom-select mr-sm-1" id="astar1">
+							<option selected>Heuristic</option>
+							<option value="1">Manhattan</option>
+							<option value="2">Euclidean</option>
+							<option value="3">Diagonal</option>
+						</select>
 					</div>
 					<div class="col-auto my-1">
-						<label class="mr-sm-2" for="inlineFormCustomSelect">Rows</label>
+						<label class="mr-sm-1" for="inlineFormCustomSelect">Rows</label>
 						<input type="text" class="form-control" id="number1" placeholder="Rows">
 					</div>
 					<div class="col-auto my-1">
-						<label class="mr-sm-2" for="inlineFormCustomSelect">Cols</label>
+						<label class="mr-sm-1" for="inlineFormCustomSelect">Cols</label>
 						<input type="text" class="form-control" id="number2" placeholder="Cols">
 					</div>
 					<div class="col-auto my-1">
@@ -95,8 +91,8 @@
 	</main>
 	
 	<footer class="footer">
-		<div class="container">
-			<span class="text-muted">Place sticky footer content here.</span>
+		<div class="container" style="text-align: center;">
+			<span id="content" class="text-muted" style="text-align: center;">Place sticky footer content here.</span>
 		</div>
 	</footer>
 </body>

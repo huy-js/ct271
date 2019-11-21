@@ -2,9 +2,7 @@ function dfs(){
     console.log(start);
     console.log(end);
     drawMap1();
-    
-    console.log(grid);
-   
+
     // #OpenSet la nhung nut da duyet
     if(openSet.length > 0){
         var winner = 0;
@@ -15,6 +13,7 @@ function dfs(){
         }
 
         var current = openSet[openSet.length-1];
+        console.log(current);
 
         if(current === end){
             path.push(end);

@@ -14,7 +14,7 @@ function dfs(){
             }
         }
 
-        var current = openSet[openSet.length];
+        var current = openSet[openSet.length-1];
 
         if(current === end){
             path.push(end);

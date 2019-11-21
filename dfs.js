@@ -1,6 +1,6 @@
 function dfs(){
-    console.log(start);
-    console.log(end);
+    // console.log(start);
+    // console.log(end);
     drawMap1();
 
     // #OpenSet la nhung nut da duyet

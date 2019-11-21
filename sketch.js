@@ -332,6 +332,9 @@ function init(){
 }
 
 function letGo(){
+    openSet = [];
+    closedSet = [];
+    path=[];
     start.wall = false;
     end.wall = false;
     openSet.push(start);

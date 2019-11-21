@@ -9,7 +9,6 @@ var end;
 var w, h;
 var path = [];
 
-
 function selected() {
     var selector = document.getElementById('level');
     var value = selector[selector.selectedIndex].value;
@@ -261,7 +260,6 @@ function solveMap1(){
 
     drawMap1();
 
-
     if(openSet.length > 0){
         var winner = 0;
         for(var i = 0; i<openSet.length; i++){
@@ -316,7 +314,6 @@ function solveMap1(){
     requestAnimationFrame(solveMap1);
 }
 
-
 function init(){
     width = 450;
     height = 450;
@@ -356,7 +353,6 @@ function letGo(){
 }
 
 function hide() {
-
     var el1 = document.getElementById("number1");
     var el2 = document.getElementById("number2");
     var el3 = document.getElementById("bt");

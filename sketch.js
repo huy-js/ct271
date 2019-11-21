@@ -130,6 +130,40 @@ function getStart(){
             ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
             start = grid[temp1][temp2];
             console.log(start);
+            document.getElementById("reGetStart").style.display = "block";
+            document.getElementById("getStart").style.display = "none";
+            canvas1.removeEventListener("click",myFunction,false);
+        }
+    }
+    canvas1.addEventListener("click", myFunction, false);
+
+    //Get Mouse Position
+    function getMousePos(canvas1, evt) {
+        var rect = canvas1.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+   
+}
+
+function reGetStart(){
+    var canvas1 = document.getElementById("canvas");
+    ctx.fillStyle = "#FFF";
+    ctx.fillRect(start.i*w, start.j*h, w-1, h-1);
+    this.myFunction = function(evt){
+        var mousePos = getMousePos(canvas1, evt);
+        var temp1 = Math.round(mousePos.x/w-0.5)
+        var temp2 = Math.round(mousePos.y/h-0.5);
+        // alert(Math.round(mousePos.x/w-0.5) + ',' + Math.round(mousePos.y/h-0.5));
+        if(grid[temp1][temp2].wall === true){
+            alert("Khong chon vao wall");
+        }else{
+            ctx.fillStyle = "#00FF00";
+            ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
+            start = grid[temp1][temp2];
+            console.log(start);
             canvas1.removeEventListener("click",myFunction,false);
         }
     }
@@ -147,6 +181,39 @@ function getStart(){
 
 function getEnd(){
     var canvas1 = document.getElementById("canvas");
+    function myFunction1 (evt) {
+        var mousePos = getMousePos(canvas1, evt);
+        var temp1 = Math.round(mousePos.x/w-0.5)
+        var temp2 = Math.round(mousePos.y/h-0.5);
+        if(grid[temp1][temp2].wall === true){
+            alert("Khong chon vao wall");
+        }else{
+            ctx.fillStyle = "#800000";
+            ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
+            end = grid[temp1][temp2];
+            document.getElementById("reGetEnd").style.display = "block";
+            document.getElementById("getEnd").style.display = "none";
+            console.log(end)
+            canvas1.removeEventListener("click",myFunction1, false);
+        }
+    }
+
+    canvas1.addEventListener("click", myFunction1 , false);
+
+    //Get Mouse Position
+    function getMousePos(canvas1, evt) {
+        var rect = canvas1.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+}
+
+function reGetEnd(){
+    var canvas1 = document.getElementById("canvas");
+    ctx.fillStyle = "#FFF";
+    ctx.fillRect(end.i*w, end.j*h, w-1, h-1);
     function myFunction1 (evt) {
         var mousePos = getMousePos(canvas1, evt);
         var temp1 = Math.round(mousePos.x/w-0.5)
@@ -384,7 +451,6 @@ function reset(){
             ctx.clearRect(i*w,j*h, w-1, h-1 );
         }
     }
-    // reDrawMap();
     $("#canvas").empty();
     grid = new Array(cols);
     var i ,j;

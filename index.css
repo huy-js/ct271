@@ -1,6 +1,11 @@
 .col-auto my-1 {
     display: inline !important;
 }
+
+.title{
+    font-weight: bold;
+}
+
 canvas{
     margin: auto;
     display: block;

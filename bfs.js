@@ -1,7 +1,7 @@
 function bfs(){
     console.log(start);
     console.log(end);
-    drawMap1();
+    colorMap();
     
     console.log(grid);
    

@@ -1,7 +1,7 @@
 function dijkstra(){
     console.log(start);
     console.log(end);
-    drawMap1();
+    colorMap();
     
     console.log(grid);
    
@@ -15,8 +15,7 @@ function dijkstra(){
         }
 
         var current = openSet[winner];
-
-
+        
         if(current === end){
             path.push(end);
             console.log('DONE');

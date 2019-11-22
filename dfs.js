@@ -1,7 +1,7 @@
 function dfs(){
     // console.log(start);
     // console.log(end);
-    drawMap1();
+    colorMap();
 
     // #OpenSet la nhung nut da duyet
     if(openSet.length > 0){

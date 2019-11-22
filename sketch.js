@@ -9,31 +9,6 @@ var end;
 var w, h;
 var path = [];
 
-function selected() {
-    var selector = document.getElementById('level');
-    var value = selector[selector.selectedIndex].value;
-    return value;
-}
-
-function astar(){
-    var x = document.getElementById("algorithm").value;
-    if(parseInt(x) === 1){
-        document.getElementById("astar").style.display = "";
-    }else{
-        document.getElementById("astar").style.display = "none";
-    }
-}
-
-function algorithm() {
-    var selector = document.getElementById('algorithm');
-    var value = selector[selector.selectedIndex].value;
-    if(value === "Algorithm"){
-        alert("Xin nhap");
-        return false;
-    }
-    return value;
-}
-
 function Spot(i ,j){
     this.i = i;
     this.j = j;
@@ -71,15 +46,16 @@ function Spot(i ,j){
             this.neighbors.push(grid[i][j+1]);
         }if(j > 0){
             this.neighbors.push(grid[i][j-1]);
-        }if(i > 0 && j > 0){
-            this.neighbors.push(grid[i - 1][j - 1]);
-        }if(i < cols - 1 && j > 0){
-            this.neighbors.push(grid[i + 1][j - 1]);
-        }if(i > 0 && j < rows - 1){
-            this.neighbors.push(grid[i - 1][j + 1]);
-        }if(i < cols - 1 && j < rows - 1){
-            this.neighbors.push(grid[i + 1][j + 1]);
         }
+        // if(i > 0 && j > 0){
+        //     this.neighbors.push(grid[i - 1][j - 1]);
+        // }if(i < cols - 1 && j > 0){
+        //     this.neighbors.push(grid[i + 1][j - 1]);
+        // }if(i > 0 && j < rows - 1){
+        //     this.neighbors.push(grid[i - 1][j + 1]);
+        // }if(i < cols - 1 && j < rows - 1){
+        //     this.neighbors.push(grid[i + 1][j + 1]);
+        // }
     }
 }
 
@@ -285,9 +261,7 @@ function reDrawMap(){
     }
 }
 
-
-function drawMap1(){
-    // console.log(openSet);
+function colorMap(){
 
     for( var i = 0; i < openSet.length; i++ ) {
         a = openSet[i];
@@ -331,84 +305,26 @@ function heuristic2(a, b){
     return d;
 }
 
-
-function solveMap1(){
-
-    drawMap1();
-
-    if(openSet.length > 0){
-        var winner = 0;
-        for(var i = 0; i<openSet.length; i++){
-            if(openSet[i].f < openSet[winner].f){
-                winner = i;
-            }
-        }
-
-        var current = openSet[winner];
-
-        if(current === end){
-            path.push(end);
-            console.log('DONE');
-            return;
-        }
-
-        removeFromArray(openSet, current);
-        closedSet.push(current);
-
-        var neighbors = current.neighbors;
-        for(var i = 0; i < neighbors.length; i++){
-            var neighbor = neighbors[i];
-            if(!closedSet.includes(neighbor) && !neighbor.wall){
-                var tentative_gScore = current.g + 1;
-                newPath = false;
-                if(openSet.includes(neighbor)){
-                    if(tentative_gScore < neighbor.g){
-                        neighbor.g = tentative_gScore;
-                        newPath = true;
-                    }
-                }else{
-                neighbor.g = tentative_gScore;
-                newPath = true;
-                openSet.push(neighbor);
-            }
-
-            if(newPath){
-                var x = parseInt(document.getElementById("astar1").value);
-                switch(x){
-                    case 1: neighbor.h = heuristic(neighbor, end); break;
-                    case 2: neighbor.h = heuristic1(neighbor, end); break;
-                    case 3: neighbor.h = heuristic2(neighbor, end); break;
-                }
-                // console.log("Heuristic", neighbor.g, neighbor.h, "\n");
-                neighbor.f = neighbor.g + neighbor.h;
-                neighbor.previous = current;
-            }
-
-            }
-        }
-
-
-    }else{
-        console.log("NO SOLUTION!!");
-        return;
-    }
-    requestAnimationFrame(solveMap1);
-}
-
 function init(){
-    width = 450;
-    height = 450;
-    document.getElementById("myCanvas").innerHTML = '<canvas id="canvas" width="0" height="0" ></canvas>';
+    if(checkForm() == true){
+        width = 450;
+        height = 450;
+        document.getElementById("myCanvas").innerHTML = '<canvas id="canvas" width="0" height="0" ></canvas>';
 
-    document.getElementById("canvas").setAttribute("width",width);
-    document.getElementById("canvas").setAttribute("height",height);
+        document.getElementById("canvas").setAttribute("width",width);
+        document.getElementById("canvas").setAttribute("height",height);
 
-    ctx = canvas.getContext("2d");
-    ctx.strokeStyle = "#FF0000";
+        ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "#FF0000";
 
-    createMap();
+        createMap();
 
-    drawMap();
+        drawMap();
+        console.log("huy");
+    }else{
+        alert("Vui long dien day du thong tin");
+    }
+    
 
 }
 
@@ -422,7 +338,7 @@ function letGo(){
 
     switch(parseInt(algorithm())) {
         case 1:
-            solveMap1();
+            astar();
             break;
         case 2:
             dijkstra();
@@ -436,47 +352,35 @@ function letGo(){
       }
 }
 
-function hide() {
-    var el1 = document.getElementById("number1");
-    var el2 = document.getElementById("number2");
-    var el3 = document.getElementById("bt");
-    var el4 = document.getElementById("level")
-
-        el1.style.display = 'none';
-        el2.style.display = 'none';
-        el3.style.display = 'none';
-        el4.style.display = 'none';
-}
-
 function reset(){
     document.getElementById("number1").value = null;
     document.getElementById("number2").value = null;
     document.getElementById("algorithm").selectedIndex = "0";
     document.getElementById("level").selectedIndex = "0";
-    var canvas = document.getElementById("canvas");
-    ctx = canvas.getContext("2d");
-    ctx.clearRect( 0, 0, width, height );
+    // var canvas = document.getElementById("canvas");
+    // ctx = canvas.getContext("2d");
+    // ctx.clearRect( 0, 0, width, height );
 
-    cols = document.getElementById("number1").value;
-    rows = document.getElementById("number2").value;
+    // cols = document.getElementById("number1").value;
+    // rows = document.getElementById("number2").value;
 
-    for(var i=0;i< cols; i++){
-        for(var j=0;j< rows; j++){
-            ctx.clearRect(i*w,j*h, w-1, h-1 );
-        }
-    }
-    $("#canvas").empty();
-    grid = new Array(cols);
-    var i ,j;
-    for(i=0;i< cols; i++){
-        grid[i] = new Array(rows);
-    }
+    // for(var i=0;i< cols; i++){
+    //     for(var j=0;j< rows; j++){
+    //         ctx.clearRect(i*w,j*h, w-1, h-1 );
+    //     }
+    // }
+    // $("#canvas").empty();
+    // grid = new Array(cols);
+    // var i ,j;
+    // for(i=0;i< cols; i++){
+    //     grid[i] = new Array(rows);
+    // }
 
-    for(i=0;i< cols; i++){
-        for(j=0;j< rows; j++){
-            grid[i][j] = 0;
-        }
-    }
+    // for(i=0;i< cols; i++){
+    //     for(j=0;j< rows; j++){
+    //         grid[i][j] = 0;
+    //     }
+    // }
     openSet = [];
     closedSet = [];
     path=[];

@@ -47,15 +47,15 @@ function Spot(i ,j){
         }if(j > 0){
             this.neighbors.push(grid[i][j-1]);
         }
-        // if(i > 0 && j > 0){
-        //     this.neighbors.push(grid[i - 1][j - 1]);
-        // }if(i < cols - 1 && j > 0){
-        //     this.neighbors.push(grid[i + 1][j - 1]);
-        // }if(i > 0 && j < rows - 1){
-        //     this.neighbors.push(grid[i - 1][j + 1]);
-        // }if(i < cols - 1 && j < rows - 1){
-        //     this.neighbors.push(grid[i + 1][j + 1]);
-        // }
+        if(i > 0 && j > 0){
+            this.neighbors.push(grid[i - 1][j - 1]);
+        }if(i < cols - 1 && j > 0){
+            this.neighbors.push(grid[i + 1][j - 1]);
+        }if(i > 0 && j < rows - 1){
+            this.neighbors.push(grid[i - 1][j + 1]);
+        }if(i < cols - 1 && j < rows - 1){
+            this.neighbors.push(grid[i + 1][j + 1]);
+        }
     }
 }
 
@@ -79,6 +79,8 @@ function createMap(){
             grid[i][j].addNeighbors(grid);
         }
     }
+    console.log(grid);
+    rawGrid = grid;
 }
 
 function createPath() {
@@ -251,11 +253,14 @@ function reDrawMap(){
     ctx.fillStyle = "#AAD5FA";
     ctx.fillRect( 0, 0, width, height );
 
-    // console.log(grid);
+    console.log(rawGrid);
 
     for(var i=0;i< cols; i++){
         for(var j=0;j< rows; j++){
-            ctx.fillStyle = "#FFF"; 
+            switch( rawGrid[i][j].wall ) {
+                case false: ctx.fillStyle = "#FFF"; break;
+                case true: ctx.fillStyle = "#013348"; break;
+            }
             ctx.fillRect(i*w,j*h, w-1, h-1 );
         }
     }
@@ -320,12 +325,19 @@ function init(){
         createMap();
 
         drawMap();
-        console.log("huy");
+        
+        document.getElementById("modify1").style.display = "";
+        document.getElementById("bt1").style.display = "none";
+        document.getElementById("level").disabled = true;
+        document.getElementById("number1").disabled = true;
+        document.getElementById("number2").disabled = true;
+        document.getElementById("getStart").style.display = "";
+        document.getElementById("getEnd").style.display = "";
+        document.getElementById("start").style.display = "";
+        document.getElementById("reset").style.display = "";
     }else{
         alert("Vui long dien day du thong tin");
     }
-    
-
 }
 
 function letGo(){
@@ -349,14 +361,59 @@ function letGo(){
         case 4:
             dfs();
             break;
-      }
+    }
+    document.getElementById("reGetStart").style.display = "none";
+    document.getElementById("reGetEnd").style.display = "none";
+    document.getElementById("start").style.display = "none";
 }
 
 function reset(){
+    document.getElementById("level").disabled = false;
+    document.getElementById("number1").disabled = false;
+    document.getElementById("number2").disabled = false;
     document.getElementById("number1").value = null;
     document.getElementById("number2").value = null;
     document.getElementById("algorithm").selectedIndex = "0";
     document.getElementById("level").selectedIndex = "0";
+    document.getElementById("content").innerHTML = "";
+    var canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    ctx.clearRect( 0, 0, width, height );
+
+    cols = document.getElementById("number1").value;
+    rows = document.getElementById("number2").value;
+
+    for(var i=0;i< cols; i++){
+        for(var j=0;j< rows; j++){
+            ctx.clearRect(i*w,j*h, w-1, h-1 );
+        }
+    }
+    $("#canvas").empty();
+    grid = new Array(cols);
+    var i ,j;
+    for(i=0;i< cols; i++){
+        grid[i] = new Array(rows);
+    }
+
+    for(i=0;i< cols; i++){
+        for(j=0;j< rows; j++){
+            grid[i][j] = 0;
+        }
+    }
+    openSet = [];
+    closedSet = [];
+    path=[];
+}
+
+function modify(){
+    // document.getElementById("number1").value = null;
+    // document.getElementById("number2").value = null;
+    document.getElementById("algorithm").selectedIndex = "0";
+    // document.getElementById("level").selectedIndex = "0";
+    document.getElementById("reGetStart").style.display = "block";
+    document.getElementById("reGetEnd").style.display = "block";
+    document.getElementById("start").style.display = "";
+    
     // var canvas = document.getElementById("canvas");
     // ctx = canvas.getContext("2d");
     // ctx.clearRect( 0, 0, width, height );
@@ -384,4 +441,5 @@ function reset(){
     openSet = [];
     closedSet = [];
     path=[];
+    reDrawMap();
 }

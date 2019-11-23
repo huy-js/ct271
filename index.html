@@ -18,19 +18,19 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item" id="getStart" onclick="return getStart(); " >
+					<li class="nav-item" id="getStart" onclick="return getStart(); " style="display: none;">
 						<a class="nav-link" href="#">Get Start</a>
 					</li>
 					<li class="nav-item" id="reGetStart" onclick="return reGetStart()" style="display: none;">
 						<a class="nav-link" href="#">ReGetStart</a>
 					</li>
-					<li class="nav-item" id="getEnd" onclick="return getEnd()">
+					<li class="nav-item" id="getEnd" onclick="return getEnd()" style="display: none;">
 						<a class="nav-link" href="#">Get End</a>
 					</li>
 					<li class="nav-item" id="reGetEnd" onclick="return reGetEnd()" style="display: none;">
 						<a class="nav-link" href="#">ReGetEnd</a>
 					</li>
-					<li class="nav-item" id="start" onclick="return letGo()">
+					<li class="nav-item" id="start" onclick="return letGo()" style="display: none;">
 						<a class="nav-link" href="#">Start</a>
 					</li>
 					</ul>
@@ -75,11 +75,14 @@
 						<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Cols</label>
 						<input type="text" class="form-control" id="number2" placeholder="Cols">
 					</div>
-					<div class="col-auto my-1">
-					  <button type="submit" class="btn btn-primary" id="bt" type="submit" onclick="return init()">Submit</button>
+					<div class="col-auto my-1" id="bt1">
+					  	<button type="submit" class="btn btn-primary" id="bt" onclick="return init()">Submit</button>
+					</div>
+					<div class="col-auto my-1" style="display: none;" id="modify1">
+						<button type="submit" class="btn btn-primary" id="modify" onclick="return modify()">Modify</button>
 					</div>
 					<div class="col-auto my-1">
-						<button class="btn btn-danger" id="reset" type="reset" onclick="return reset()">Reset</button>
+						<button class="btn btn-danger" id="reset" type="reset" onclick="return reset()" style="display: none;">Reset</button>
 					</div>
 				</div>
 				<div id="myCanvas">

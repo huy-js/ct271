@@ -1,4 +1,4 @@
-function dfs1(){
+function dfs(){
     // #OpenSet la nhung nut da duyet
     if(openSet.length > 0){
 

@@ -48,9 +48,9 @@ function dfs(){
         }
     }else{
         console.log("NO SOLUTION!!");
-        cancelAnimationFrame(dfs1)
+        cancelAnimationFrame(dfs)
         return;
     }
     colorMap();
-    requestAnimationFrame(dfs1);
+    requestAnimationFrame(dfs);
 }

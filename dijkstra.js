@@ -1,11 +1,5 @@
 function dijkstra(){
-    console.log(start);
-    console.log(end);
-    colorMap();
-    
-    console.log(grid);
-   
-    // #OpenSet la nhung nut da duyet
+    //OpenSet la nhung nut da duyet
     if(openSet.length > 0){
         var winner = 0;
         for(var i = 0; i<openSet.length; i++){
@@ -14,11 +8,17 @@ function dijkstra(){
             }
         }
 
-        var current = openSet[winner];
+        current = openSet[winner];
         
         if(current === end){
-            path.push(end);
+            // current = end;
+            createPath();
+            var temp = "OpenSet = " + openSet.length;
+            document.getElementById("openSet").innerHTML = temp;
+            var temp = "CloseSet = " + closedSet.length;
+            document.getElementById("closedSet").innerHTML = temp;
             console.log('DONE');
+            cancelAnimationFrame(dijkstra);
             return;
         }
 
@@ -40,6 +40,7 @@ function dijkstra(){
                 neighbor.g = tentative_gScore;
                 newPath = true;
                 openSet.push(neighbor);
+                console.log(openSet);
             }
 
             if(newPath){
@@ -49,10 +50,19 @@ function dijkstra(){
                 neighbor.previous = current;
             }
           }
-      }
-    }else{
+        }
+  
+   
+    }else{  
         console.log("NO SOLUTION!!");
+        var temp = "OpenSet = " + openSet.length;
+        document.getElementById("openSet").innerHTML = temp;
+        var temp = "CloseSet = " + closedSet.length;
+        document.getElementById("closedSet").innerHTML = temp;
+        cancelAnimationFrame(dijkstra);
+        alert("NO SOLUTION");
         return;
     }
+    colorMap();
     requestAnimationFrame(dijkstra);
 }

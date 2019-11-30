@@ -1,11 +1,10 @@
+// var noSolution = false;
 function astar(){
-    colorMap();
-
     var x = parseInt(document.getElementById("astar1").value);
-    console.log(x);
     if(x === 0){
         alert("Xin vui long chon giai thuat Heuristic");
     }else{
+        console.log(start);
         if(openSet.length > 0){
             var winner = 0;
             for(var i = 0; i<openSet.length; i++){
@@ -13,12 +12,19 @@ function astar(){
                     winner = i;
                 }
             }
+            console.log(openSet);
     
-            var current = openSet[winner];
+            current = openSet[winner];
     
             if(current === end){
-                path.push(end);
+                createPath();
+                var temp = "OpenSet = " + openSet.length;
+                document.getElementById("openSet").innerHTML = temp;
+                var temp = "CloseSet = " + closedSet.length;
+                document.getElementById("closedSet").innerHTML = temp;
                 console.log('DONE');
+                cancelAnimationFrame(astar);  
+                
                 return;
             }
     
@@ -55,9 +61,26 @@ function astar(){
                 }
             }
         }else{
-            console.log("NO SOLUTION!!");
+            console.log("NO SOLUTION!!"); 
+            cancelAnimationFrame(astar);
             return;
         }
+        colorMap();
         requestAnimationFrame(astar);
-    }
+    } 
+}
+
+function heuristic(a, b){
+    var d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
+    return d;
+}
+
+function heuristic1(a, b){
+    var d = Math.sqrt(Math.abs(a.i - b.i)*Math.abs(a.i - b.i) + Math.abs(a.j - b.j)*Math.abs(a.j - b.j));
+    return d;
+}
+
+function heuristic2(a, b){
+    var d = Math.max(Math.abs(a.i - b.i) , Math.abs(a.j - b.j));
+    return d;
 }

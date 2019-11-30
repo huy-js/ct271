@@ -1,13 +1,13 @@
-var cols = 0;
-var ctx;
-var rows = 0;
-var grid = new Array(cols);
-var openSet = [];
-var closedSet = [];
-var start;
-var end;
-var w, h;
-var path = [];
+var cols = 0; //tong so cot
+var ctx; 
+var rows = 0; //tong so hang
+var grid = new Array(cols); //
+var openSet = []; //tập mở 
+var closedSet = []; //tập đóng 
+var start; //bắt đầu
+var end; //kết thúc
+var w, h; //số lượng ô của mỗi hàng và mỗi cột 
+var path = []; //đường đi từ đầu đến đích 
 
 function Spot(i ,j){
     this.i = i;
@@ -17,21 +17,12 @@ function Spot(i ,j){
     this.h = 0;
     this.x = i;
     this.y = j;
-    this.neighbors = [];
-    this.previous = undefined;
-    this.wall = false;
+    this.neighbors = []; //mảng chứa các neighbors 
+    this.previous = undefined; //nút cha
+    this.wall = false; //có phải là wall hay không 
 
-    if(Math.random() < selected()){
+    if(Math.random() < selected()){  //selected trong checkForm()
         this.wall = true;
-    }
-
-    this.show = function(col){
-        fill(col);
-        if(this.wall){
-            fill(0);
-        }
-        noStroke();
-        rect(this.i * w , this.j * h  , w - 1 , h - 1);
     }
 
     this.addNeighbors = function(grid){
@@ -80,25 +71,25 @@ function createMap(){
         }
     }
     console.log(grid);
-    rawGrid = grid;
 }
 
 function createPath() {
+    path = [];
     var temp = end;
+
     while(temp.previous){
         path.push(temp.previous);
         temp = temp.previous;
     }
-    // console.log(path);
 
-    for( var i = path.length-1 ; i >= 0; i-- ){
+    for( var i=0;i<path.length ;i++ ){
         a = path[i];
         if(a!== start && a!== end){
-            // console.log(a);
             ctx.fillStyle = "#F7FF61";
             ctx.fillRect(a.x*w, a.y*h, w-1, h-1);
         } 
     }
+
 }
 
 function getStart(){
@@ -108,7 +99,6 @@ function getStart(){
         var mousePos = getMousePos(canvas1, evt);
         var temp1 = Math.round(mousePos.x/w-0.5)
         var temp2 = Math.round(mousePos.y/h-0.5);
-        // alert(Math.round(mousePos.x/w-0.5) + ',' + Math.round(mousePos.y/h-0.5));
         if(grid[temp1][temp2].wall === true){
             alert("Khong chon vao wall");
 
@@ -116,15 +106,17 @@ function getStart(){
             ctx.fillStyle = "#00FF00";
             ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
             start = grid[temp1][temp2];
+            let tempo = "Start Location: "+ temp1 + ":" + temp2;
+            document.getElementById("start-location").style.display = "";
+            document.getElementById("start-location").innerHTML = tempo;
             console.log(start);
             document.getElementById("reGetStart").style.display = "block";
             document.getElementById("getStart").style.display = "none";
             canvas1.removeEventListener("click",myFunction,false);
         }
     }
-    canvas1.addEventListener("click", myFunction, false);
+    canvas1.addEventListener("click", myFunction,false);
 
-    //Get Mouse Position
     function getMousePos(canvas1, evt) {
         var rect = canvas1.getBoundingClientRect();
         return {
@@ -143,20 +135,21 @@ function reGetStart(){
         var mousePos = getMousePos(canvas1, evt);
         var temp1 = Math.round(mousePos.x/w-0.5)
         var temp2 = Math.round(mousePos.y/h-0.5);
-        // alert(Math.round(mousePos.x/w-0.5) + ',' + Math.round(mousePos.y/h-0.5));
+        
         if(grid[temp1][temp2].wall === true){
             alert("Khong chon vao wall");
         }else{
             ctx.fillStyle = "#00FF00";
             ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
             start = grid[temp1][temp2];
+            let tempo = "Start Location: "+ temp1 + ":" + temp2;
+            document.getElementById("start-location").innerHTML = tempo;
             console.log(start);
             canvas1.removeEventListener("click",myFunction,false);
         }
     }
-    canvas1.addEventListener("click", myFunction, false);
+    canvas1.addEventListener("click", myFunction,false);
 
-    //Get Mouse Position
     function getMousePos(canvas1, evt) {
         var rect = canvas1.getBoundingClientRect();
         return {
@@ -178,16 +171,18 @@ function getEnd(){
             ctx.fillStyle = "#800000";
             ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
             end = grid[temp1][temp2];
+            document.getElementById("end-location").style.display = "";
+            let tempo = "End Location: "+ temp1 + ":" + temp2;
+            document.getElementById("end-location").innerHTML = tempo;
+            console.log(end);
             document.getElementById("reGetEnd").style.display = "block";
             document.getElementById("getEnd").style.display = "none";
-            console.log(end)
-            canvas1.removeEventListener("click",myFunction1, false);
+            canvas1.removeEventListener("click",myFunction1,false);
         }
     }
 
-    canvas1.addEventListener("click", myFunction1 , false);
+    canvas1.addEventListener("click", myFunction1,false);
 
-    //Get Mouse Position
     function getMousePos(canvas1, evt) {
         var rect = canvas1.getBoundingClientRect();
         return {
@@ -211,14 +206,13 @@ function reGetEnd(){
             ctx.fillStyle = "#800000";
             ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
             end = grid[temp1][temp2];
-            console.log(end)
-            canvas1.removeEventListener("click",myFunction1, false);
+            console.log(end);
+            canvas1.removeEventListener("click",myFunction1,false);
         }
     }
 
-    canvas1.addEventListener("click", myFunction1 , false);
+    canvas1.addEventListener("click", myFunction1,false);
 
-    //Get Mouse Position
     function getMousePos(canvas1, evt) {
         var rect = canvas1.getBoundingClientRect();
         return {
@@ -233,8 +227,6 @@ function drawMap(){
     h = height / rows; //do lon cua o
     ctx.fillStyle = "#AAD5FA";
     ctx.fillRect( 0, 0, width, height );
-
-    console.log(grid);
 
     for(var i=0;i< cols; i++){
         for(var j=0;j< rows; j++){
@@ -252,18 +244,27 @@ function reDrawMap(){
     h = height / rows; //do lon cua o
     ctx.fillStyle = "#AAD5FA";
     ctx.fillRect( 0, 0, width, height );
-
-    console.log(rawGrid);
+    for(var i=0;i< cols; i++){
+        for(var j=0;j< rows; j++){
+            grid[i][j].f = 0;
+            grid[i][j].g = 0;
+            grid[i][j].h = 0;
+        }
+    }
 
     for(var i=0;i< cols; i++){
         for(var j=0;j< rows; j++){
-            switch( rawGrid[i][j].wall ) {
+            switch( grid[i][j].wall ) {
                 case false: ctx.fillStyle = "#FFF"; break;
                 case true: ctx.fillStyle = "#013348"; break;
             }
             ctx.fillRect(i*w,j*h, w-1, h-1 );
         }
     }
+    ctx.fillStyle = "#00FF00";
+    ctx.fillRect(start.i*w, start.j*h, w-1, h-1);
+    ctx.fillStyle = "#800000";
+    ctx.fillRect(end.i*w, end.j*h, w-1, h-1);
 }
 
 function colorMap(){
@@ -284,38 +285,22 @@ function colorMap(){
         }
     }
 
-    createPath();
+    // createPath();
 }
 
-function removeFromArray(arr, elt){
-    for(var i = arr.length - 1; i >= 0; i--){
-        if(arr[i] == elt){
-            arr.splice(i,1);
+function removeFromArray(array, element){
+    for(var i = array.length - 1; i >= 0; i--){
+        if(array[i] == element){
+            array.splice(i,1);
         }
     }
 }
 
-function heuristic(a, b){
-    var d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
-    return d;
-}
-
-function heuristic1(a, b){
-    var d = Math.sqrt(Math.abs(a.i - b.i)*Math.abs(a.i - b.i) + Math.abs(a.j - b.j)*Math.abs(a.j - b.j));
-    return d;
-}
-
-function heuristic2(a, b){
-    var d = Math.max(Math.abs(a.i - b.i) , Math.abs(a.j - b.j));
-    return d;
-}
-
 function init(){
     if(checkForm() == true){
-        width = 450;
-        height = 450;
+        width = 400;
+        height = 400;
         document.getElementById("myCanvas").innerHTML = '<canvas id="canvas" width="0" height="0" ></canvas>';
-
         document.getElementById("canvas").setAttribute("width",width);
         document.getElementById("canvas").setAttribute("height",height);
 
@@ -335,6 +320,7 @@ function init(){
         document.getElementById("getEnd").style.display = "";
         document.getElementById("start").style.display = "";
         document.getElementById("reset").style.display = "";
+        document.getElementById("text-render").style.display = "none";
     }else{
         alert("Vui long dien day du thong tin");
     }
@@ -347,6 +333,7 @@ function letGo(){
     start.wall = false;
     end.wall = false;
     openSet.push(start);
+    console.log(end);
 
     switch(parseInt(algorithm())) {
         case 1:
@@ -376,7 +363,17 @@ function reset(){
     document.getElementById("algorithm").selectedIndex = "0";
     document.getElementById("level").selectedIndex = "0";
     document.getElementById("content").innerHTML = "";
+    document.getElementById("bt1").style.display = "";
+    document.getElementById("modify1").style.display = "none";
+    document.getElementById("getStart").style.display = "none";
+    document.getElementById("text-render").style.display = "";
+    document.getElementById("getEnd").style.display = "none";
+    document.getElementById("start-location").style.display = "none";
+    document.getElementById("end-location").style.display = "none";
+    document.getElementById("openSet").style.display = "none";
+    document.getElementById("closedSet").style.display = "none";
     var canvas = document.getElementById("canvas");
+    canvas.style.display = "none";
     ctx = canvas.getContext("2d");
     ctx.clearRect( 0, 0, width, height );
 
@@ -410,9 +407,10 @@ function modify(){
     // document.getElementById("number2").value = null;
     document.getElementById("algorithm").selectedIndex = "0";
     // document.getElementById("level").selectedIndex = "0";
-    document.getElementById("reGetStart").style.display = "block";
-    document.getElementById("reGetEnd").style.display = "block";
-    document.getElementById("start").style.display = "";
+    document.getElementById("getStart").style.display = "";
+    document.getElementById("getEnd").style.display = "none";
+    document.getElementById("start1").style.display = "";
+    document.getElementById("start2").style.display = "none";
     
     // var canvas = document.getElementById("canvas");
     // ctx = canvas.getContext("2d");
@@ -423,10 +421,24 @@ function modify(){
 
     // for(var i=0;i< cols; i++){
     //     for(var j=0;j< rows; j++){
-    //         ctx.clearRect(i*w,j*h, w-1, h-1 );
+    //         grid[i][j].f = 0;
+    //         grid[i][j].g = 0;
+    //         grid[i][j].h = 0;
     //     }
     // }
-    // $("#canvas").empty();
+    $("#canvas").empty();
+    
+    width = 400;
+    height = 400;
+    document.getElementById("myCanvas").innerHTML = '<canvas id="canvas" width="0" height="0" ></canvas>';
+
+    document.getElementById("canvas").setAttribute("width",width);
+    document.getElementById("canvas").setAttribute("height",height);
+
+    ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#FF0000";
+
+    reDrawMap();
     // grid = new Array(cols);
     // var i ,j;
     // for(i=0;i< cols; i++){
@@ -441,5 +453,20 @@ function modify(){
     openSet = [];
     closedSet = [];
     path=[];
-    reDrawMap();
+    console.log(openSet);
+    console.log(start);
+    // start = undefined;
+    // end = undefined;
+    console.log(start);
 }
+
+function temp(){
+    for(var i=0;i< cols; i++){
+        for(var j=0;j< rows; j++){
+            grid[i][j].f = 0;
+            grid[i][j].g = 0;
+            grid[i][j].h = 0;
+        }
+    }
+}
+

@@ -1,24 +1,17 @@
 function bfs(){
-    console.log(start);
-    console.log(end);
-    colorMap();
-    
-    console.log(grid);
-   
     // #OpenSet la nhung nut da duyet
     if(openSet.length > 0){
-        // var winner = 0;
-        // for(var i = 0; i<openSet.length; i++){
-        //     if(openSet[i].f < openSet[winner].f ){
-        //         winner = i;
-        //     }
-        // }
 
-        var current = openSet[0];
-
+        current = openSet[0];
+        
         if(current === end){
-            path.push(end);
+            createPath();
             console.log('DONE');
+            var temp = "OpenSet = " + openSet.length;
+            document.getElementById("openSet").innerHTML = temp;
+            var temp = "CloseSet = " + closedSet.length;
+            document.getElementById("closedSet").innerHTML = temp;
+            cancelAnimationFrame(bfs);
             return;
         }
 
@@ -52,7 +45,9 @@ function bfs(){
       }
     }else{
         console.log("NO SOLUTION!!");
+        cancelAnimationFrame(bfs);
         return;
     }
+    colorMap();
     requestAnimationFrame(bfs);
 }

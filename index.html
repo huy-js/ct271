@@ -18,75 +18,136 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item" id="getStart" onclick="return getStart(); " style="display: none;">
+					<!-- <li class="nav-item" id="getStart" onclick="return getStart(); " style="display: none;">
 						<a class="nav-link" href="#">Get Start</a>
-					</li>
-					<li class="nav-item" id="reGetStart" onclick="return reGetStart()" style="display: none;">
+					</li> -->
+					<!-- <li class="nav-item" id="reGetStart" onclick="return reGetStart()" style="display: none;">
 						<a class="nav-link" href="#">ReGetStart</a>
-					</li>
-					<li class="nav-item" id="getEnd" onclick="return getEnd()" style="display: none;">
+					</li> -->
+					<!-- <li class="nav-item" id="getEnd" onclick="return getEnd()" style="display: none;">
 						<a class="nav-link" href="#">Get End</a>
-					</li>
-					<li class="nav-item" id="reGetEnd" onclick="return reGetEnd()" style="display: none;">
+					</li> -->
+					<!-- <li class="nav-item" id="reGetEnd" onclick="return reGetEnd()" style="display: none;">
 						<a class="nav-link" href="#">ReGetEnd</a>
-					</li>
-					<li class="nav-item" id="start" onclick="return letGo()" style="display: none;">
+					</li> -->
+					<!-- <li class="nav-item" id="start" onclick="return letGo()" style="display: none;">
 						<a class="nav-link" href="#">Start</a>
-					</li>
+					</li> -->
 					</ul>
 				</div>
 		</nav>
 	</header>
 	<main role="main" class="container">
 			<div class="form-row align-items-center">
-					<div class="col-auto my-1">
-					  <label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Hard</label>
-					  <select class="custom-select mr-sm-1" id="level">
-						<option value="0">Hard Level</option>
-						<option value="0.3">Easy</option>
-						<option value="0.4">Medium</option>
-						<option value="0.6">Hard</option>
-					  </select>
+					
+				</div>
+				<div class="row">
+					<div id="blank-area" class="col">
+						<div id="myCanvas">
+						</div>
+						<p id="text-render" style="text-align: center;padding: 200px 0;">Waiting Render</p>
+						<div class="row">
+							<div class="col">
+								<p id="start-location" style="text-align: right;"></p>
+							</div>
+							<div class="col">
+								<p id="end-location"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<p id="openSet" style="text-align: right;"></p>
+							</div>
+							<div class="col">
+								<p id="closedSet"></p>
+							</div>
+						</div>
 					</div>
-					<div class="col-auto my-1" onchange="checkAstar(); ">
-						<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Algo</label>
-						<select class="custom-select mr-sm-1" id="algorithm"  onchange="contentFooter()">
-							<option value="0">Algorithm</option>
-							<option value="1">A-Star</option>
-							<option value="2">Dijkstra</option>
-							<option value="3">Breadth First Search</option>
-							<option value="4">Depth First Search</option>
-						</select>
-					</div>
-					<div id="astar" class="col-auto my-1" style="display: none;">
-						<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Heuristic</label>
-						<select class="custom-select mr-sm-1" id="astar1">
-							<option value="0">Heuristic</option>
-							<option value="1">Manhattan</option>
-							<option value="2">Euclidean</option>
-							<option value="3">Diagonal</option>
-						</select>
-					</div>
-					<div class="col-auto my-1">
-						<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Rows</label>
-						<input type="text" class="form-control" id="number1" placeholder="Rows">
-					</div>
-					<div class="col-auto my-1">
-						<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Cols</label>
-						<input type="text" class="form-control" id="number2" placeholder="Cols">
-					</div>
-					<div class="col-auto my-1" id="bt1">
-					  	<button type="submit" class="btn btn-primary" id="bt" onclick="return init()">Submit</button>
-					</div>
-					<div class="col-auto my-1" style="display: none;" id="modify1">
-						<button type="submit" class="btn btn-primary" id="modify" onclick="return modify()">Modify</button>
-					</div>
-					<div class="col-auto my-1">
-						<button class="btn btn-danger" id="reset" type="reset" onclick="return reset()" style="display: none;">Reset</button>
+					<div class="col">
+						<div class="col-auto my-1">
+							<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Hard</label>
+							<select class="custom-select mr-sm-1" id="level">
+							  <option value="0">Hard Level</option>
+							  <option value="0.3">Easy</option>
+							  <option value="0.4">Medium</option>
+							  <option value="0.6">Hard</option>
+							</select>
+						</div>
+						<div class="col-auto my-1" onchange="checkAstar(); ">
+							<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Algo</label>
+							<select class="custom-select mr-sm-1" id="algorithm"  onchange="contentFooter()">
+								<option value="0">Algorithm</option>
+								<option value="1">A-Star</option>
+								<option value="2">Dijkstra</option>
+								<option value="3">Breadth First Search</option>
+								<option value="4">Depth First Search</option>
+							</select>
+						</div>
+						<div id="astar" class="col-auto my-1" style="display: none;">
+							<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Heuristic</label>
+							<select class="custom-select mr-sm-1" id="astar1">
+								<option value="0">Heuristic</option>
+								<option value="1">Manhattan</option>
+								<option value="2">Euclidean</option>
+								<option value="3">Diagonal</option>
+							</select>
+						</div>
+						<div class="col-auto my-1">
+							<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Rows</label>
+							<input type="text" class="form-control" id="number1" placeholder="Rows">
+						</div>
+						<div class="col-auto my-1">
+							<label class="title" class="mr-sm-1" for="inlineFormCustomSelect">Cols</label>
+							<input type="text" class="form-control" id="number2" placeholder="Cols">
+						</div>
+						  
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="col-auto my-1" id="bt1">
+									<button type="submit" class="btn btn-primary" id="bt" onclick="return init()">Submit</button>
+								</div>
+								<div class="col-auto my-1" style="display: none;" id="modify1">
+									<button type="submit" class="btn btn-primary" onclick="return modify()">Modify</button>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="col-auto my-1">
+									<button class="btn btn-danger" id="reset" type="reset" onclick="return reset()" style="display: none;">Reset</button>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<!-- Chỉ dành để chỉnh giao diện -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="col-auto my-1" id="getStart" onclick="return getStart(); " style="display: none;">
+									<button type="submit" class="btn btn-primary" id="start2" >Get Start</button>
+									<button type="button" class="btn btn-warning" id="start1" onclick="return letGo()" style="display: none;">Start</button>
+								</div>
+								<div class="col-auto my-1" id="reGetStart" onclick="return reGetStart(); " style="display: none;">
+									<button type="submit" class="btn btn-primary" >ReGetStart</button>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="col-auto my-1" id="getEnd" onclick="return getEnd(); " style="display: none;">
+									<button type="submit" class="btn btn-primary"  >Get End</button>
+								</div>
+								<div class="col-auto my-1" id="reGetEnd" onclick="return reGetEnd(); " style="display: none;">
+									<button type="submit" class="btn btn-primary" >ReGetEnd</button>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-auto my-1">
+									<button type="button" class="btn btn-warning" id="start" onclick="return letGo()" style="display: none;">Start</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div id="myCanvas">
-				</div>
+				
 	</main>
 	
 	<footer class="footer">

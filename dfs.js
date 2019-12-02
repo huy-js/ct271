@@ -1,5 +1,5 @@
 function dfs(){
-    // #OpenSet la nhung nut da duyet
+    // #OpenSet la nhung nut dang dc duyet
     if(openSet.length > 0){
 
         console.log(openSet);
@@ -7,7 +7,6 @@ function dfs(){
         current = openSet[openSet.length-1];
 
         if(current === end){
-            // path.push(end);
             createPath();
             console.log('DONE');
             var temp = "Path Length = " + path.length;
@@ -44,7 +43,6 @@ function dfs(){
 
             if(newPath){
                 neighbor.h = 0;
-                // console.log("Heuristic", neighbor.g, neighbor.h, "\n");
                 neighbor.f = neighbor.g + neighbor.h;
                 neighbor.previous = current;
             }
@@ -52,6 +50,7 @@ function dfs(){
         }
     }else{
         console.log("NO SOLUTION!!");
+        alert("Không có đường đi");
         cancelAnimationFrame(dfs)
         return;
     }

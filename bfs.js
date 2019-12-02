@@ -1,13 +1,12 @@
 function bfs(){
-    // #OpenSet la nhung nut da duyet
+    // #OpenSet la nhung nut chuan bi duyet
     if(openSet.length > 0){
-
+        console.log(openSet);
         current = openSet[0];
         
         if(current === end){
             createPath();
             console.log('DONE');
-            console.log(path);
             var temp = "Path Length = " + path.length;
             document.getElementById("path-length").innerHTML = temp;
             var temp = "Weight = " + path[0].f;
@@ -50,6 +49,7 @@ function bfs(){
     }else{
         console.log("NO SOLUTION!!");
         cancelAnimationFrame(bfs);
+        alert("Không có đường đi");
         return;
     }
     colorMap();

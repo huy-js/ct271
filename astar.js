@@ -1,23 +1,22 @@
-// var noSolution = false;
 function astar(){
     var x = parseInt(document.getElementById("astar1").value);
     if(x === 0){
         alert("Xin vui long chon giai thuat Heuristic");
     }else{
-        console.log(start);
         if(openSet.length > 0){
-            var winner = 0;
+            console.log(openSet);
+            var dem = 0;
             for(var i = 0; i<openSet.length; i++){
-                if(openSet[i].f < openSet[winner].f){
-                    winner = i;
+                if(openSet[i].f < openSet[dem].f){
+                    dem = i;
                 }
             }
     
-            current = openSet[winner];
+            current = openSet[dem];
     
             if(current === end){
                 createPath();
-                console.log(path);
+                console.log('DONE');
                 var temp = "Path Length = " + path.length;
                 document.getElementById("path-length").innerHTML = temp;
                 var temp = "Weight = " + path[0].f;
@@ -26,7 +25,6 @@ function astar(){
                 document.getElementById("openSet").innerHTML = temp;
                 var temp = "CloseSet = " + closedSet.length;
                 document.getElementById("closedSet").innerHTML = temp;
-                console.log('DONE');
                 cancelAnimationFrame(astar);  
                 
                 return;
@@ -58,14 +56,14 @@ function astar(){
                         case 2: neighbor.h = euclide(neighbor, end); break;
                         case 3: neighbor.h = diagonal(neighbor, end); break;
                     }
-                    // console.log("Heuristic", neighbor.g, neighbor.h, "\n");
                     neighbor.f = neighbor.g + neighbor.h;
                     neighbor.previous = current;
                 }
                 }
             }
         }else{
-            console.log("NO SOLUTION!!"); 
+            console.log("NO SOLUTION!!");
+            alert("Không có đường đi"); 
             cancelAnimationFrame(astar);
             return;
         }

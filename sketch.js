@@ -70,7 +70,6 @@ function createMap(){
             grid[i][j].addNeighbors(grid);
         }
     }
-    console.log(grid);
 }
 
 function createPath() {
@@ -109,7 +108,6 @@ function getStart(){
             let tempo = "Start Location: "+ temp1 + ":" + temp2;
             document.getElementById("start-location").style.display = "";
             document.getElementById("start-location").innerHTML = tempo;
-            console.log(start);
             document.getElementById("reGetStart").style.display = "block";
             document.getElementById("getStart").style.display = "none";
             canvas1.removeEventListener("click",myFunction,false);
@@ -144,7 +142,6 @@ function reGetStart(){
             start = grid[temp1][temp2];
             let tempo = "Start Location: "+ temp1 + ":" + temp2;
             document.getElementById("start-location").innerHTML = tempo;
-            console.log(start);
             canvas1.removeEventListener("click",myFunction,false);
         }
     }
@@ -174,7 +171,6 @@ function getEnd(){
             document.getElementById("end-location").style.display = "";
             let tempo = "End Location: "+ temp1 + ":" + temp2;
             document.getElementById("end-location").innerHTML = tempo;
-            console.log(end);
             document.getElementById("reGetEnd").style.display = "block";
             document.getElementById("getEnd").style.display = "none";
             canvas1.removeEventListener("click",myFunction1,false);
@@ -206,7 +202,8 @@ function reGetEnd(){
             ctx.fillStyle = "#800000";
             ctx.fillRect(temp1*w, temp2*h, w-1, h-1);
             end = grid[temp1][temp2];
-            console.log(end);
+            let tempo = "Start Location: "+ temp1 + ":" + temp2;
+            document.getElementById("start-location").innerHTML = tempo;
             canvas1.removeEventListener("click",myFunction1,false);
         }
     }
@@ -285,7 +282,6 @@ function colorMap(){
         }
     }
 
-    // createPath();
 }
 
 function removeFromArray(array, element){
@@ -333,8 +329,6 @@ function letGo(){
     start.wall = false;
     end.wall = false;
     openSet.push(start);
-    console.log(end);
-
     switch(parseInt(algorithm())) {
         case 1:
             astar();
@@ -408,10 +402,7 @@ function reset(){
 }
 
 function modify(){
-    // document.getElementById("number1").value = null;
-    // document.getElementById("number2").value = null;
     document.getElementById("algorithm").selectedIndex = "0";
-    // document.getElementById("level").selectedIndex = "0";
     document.getElementById("getStart").style.display = "";
     document.getElementById("getEnd").style.display = "none";
     document.getElementById("start1").style.display = "";
@@ -419,20 +410,6 @@ function modify(){
     document.getElementById("algorithm").disabled = false;
     document.getElementById("astar1").disabled = false;
     
-    // var canvas = document.getElementById("canvas");
-    // ctx = canvas.getContext("2d");
-    // ctx.clearRect( 0, 0, width, height );
-
-    // cols = document.getElementById("number1").value;
-    // rows = document.getElementById("number2").value;
-
-    // for(var i=0;i< cols; i++){
-    //     for(var j=0;j< rows; j++){
-    //         grid[i][j].f = 0;
-    //         grid[i][j].g = 0;
-    //         grid[i][j].h = 0;
-    //     }
-    // }
     $("#canvas").empty();
     
     width = 400;
@@ -446,25 +423,10 @@ function modify(){
     ctx.strokeStyle = "#FF0000";
 
     reDrawMap();
-    // grid = new Array(cols);
-    // var i ,j;
-    // for(i=0;i< cols; i++){
-    //     grid[i] = new Array(rows);
-    // }
 
-    // for(i=0;i< cols; i++){
-    //     for(j=0;j< rows; j++){
-    //         grid[i][j] = 0;
-    //     }
-    // }
     openSet = [];
     closedSet = [];
     path=[];
-    console.log(openSet);
-    console.log(start);
-    // start = undefined;
-    // end = undefined;
-    console.log(start);
 }
 
 function temp(){

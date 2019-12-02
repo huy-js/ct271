@@ -1,19 +1,19 @@
 function dijkstra(){
-    //OpenSet la nhung nut da duyet
+    //OpenSet la nhung nut dang duyet
     if(openSet.length > 0){
-        var winner = 0;
+        console.log(openSet);
+        var dem = 0;
         for(var i = 0; i<openSet.length; i++){
-            if(openSet[i].f < openSet[winner].f ){
-                winner = i;
+            if(openSet[i].f < openSet[dem].f ){
+                dem = i;
             }
         }
 
-        current = openSet[winner];
+        current = openSet[dem];
         
         if(current === end){
-            // current = end;
             createPath();
-            console.log(path);
+            console.log('DONE');
             var temp = "Path Length = " + path.length;
             document.getElementById("path-length").innerHTML = temp;
             var temp = "Weight = " + path[0].f;
@@ -22,7 +22,6 @@ function dijkstra(){
             document.getElementById("openSet").innerHTML = temp;
             var temp = "CloseSet = " + closedSet.length;
             document.getElementById("closedSet").innerHTML = temp;
-            console.log('DONE');
             cancelAnimationFrame(dijkstra);
             return;
         }
@@ -45,7 +44,6 @@ function dijkstra(){
                 neighbor.g = tentative_gScore;
                 newPath = true;
                 openSet.push(neighbor);
-                console.log(openSet);
             }
 
             if(newPath){
@@ -64,7 +62,7 @@ function dijkstra(){
         var temp = "CloseSet = " + closedSet.length;
         document.getElementById("closedSet").innerHTML = temp;
         cancelAnimationFrame(dijkstra);
-        alert("NO SOLUTION");
+        alert("Không có đường đi");
         return;
     }
     colorMap();

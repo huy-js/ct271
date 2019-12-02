@@ -371,6 +371,8 @@ function reset(){
     document.getElementById("path-length").style.display = "none";
     document.getElementById("weight").style.display = "none";
     document.getElementById("algorithm").disabled = false;
+    document.getElementById("astar1").disabled = false;
+    document.getElementById("astar").style.display = "none";
     var canvas = document.getElementById("canvas");
     canvas.style.display = "none";
     ctx = canvas.getContext("2d");

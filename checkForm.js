@@ -3,14 +3,14 @@ function checkForm(){
     flag = true;
     var selector = document.getElementById('level');
     var value = selector[selector.selectedIndex].value;
-    console.log(value);
+    // console.log(value);
     var selector1 = document.getElementById('algorithm');
     var value1 = selector1[selector1.selectedIndex].value;
-    console.log(value1);
+    // console.log(value1);
     var selector2 = document.getElementById('number1').value.length;
-    console.log(selector2);
+    // console.log(selector2);
     var selector3 = document.getElementById('number2').value.length;
-    console.log(selector3);
+    // console.log(selector3);
     if(value === "0" || value1 === "0" || selector2 === 0 || selector3 === 0){
         flag = false;
     }

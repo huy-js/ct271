@@ -10,6 +10,10 @@ function dfs(){
             // path.push(end);
             createPath();
             console.log('DONE');
+            var temp = "Path Length = " + path.length;
+            document.getElementById("path-length").innerHTML = temp;
+            var temp = "Weight = " + path[0].f;
+            document.getElementById("weight").innerHTML = temp;
             var temp = "OpenSet = " + openSet.length;
             document.getElementById("openSet").innerHTML = temp;
             var temp = "CloseSet = " + closedSet.length;
@@ -39,7 +43,7 @@ function dfs(){
             }
 
             if(newPath){
-                neighbor.h = 1;
+                neighbor.h = 0;
                 // console.log("Heuristic", neighbor.g, neighbor.h, "\n");
                 neighbor.f = neighbor.g + neighbor.h;
                 neighbor.previous = current;

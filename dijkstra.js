@@ -13,6 +13,11 @@ function dijkstra(){
         if(current === end){
             // current = end;
             createPath();
+            console.log(path);
+            var temp = "Path Length = " + path.length;
+            document.getElementById("path-length").innerHTML = temp;
+            var temp = "Weight = " + path[0].f;
+            document.getElementById("weight").innerHTML = temp;
             var temp = "OpenSet = " + openSet.length;
             document.getElementById("openSet").innerHTML = temp;
             var temp = "CloseSet = " + closedSet.length;
@@ -44,8 +49,7 @@ function dijkstra(){
             }
 
             if(newPath){
-                neighbor.h = 1;
-                // console.log("Heuristic", neighbor.g, neighbor.h, "\n");
+                neighbor.h = 0; //với thuật toán dijkstra hàm h luôn bằng 0 
                 neighbor.f = neighbor.g + neighbor.h;
                 neighbor.previous = current;
             }

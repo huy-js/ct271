@@ -12,12 +12,16 @@ function astar(){
                     winner = i;
                 }
             }
-            console.log(openSet);
     
             current = openSet[winner];
     
             if(current === end){
                 createPath();
+                console.log(path);
+                var temp = "Path Length = " + path.length;
+                document.getElementById("path-length").innerHTML = temp;
+                var temp = "Weight = " + path[0].f;
+                document.getElementById("weight").innerHTML = temp;
                 var temp = "OpenSet = " + openSet.length;
                 document.getElementById("openSet").innerHTML = temp;
                 var temp = "CloseSet = " + closedSet.length;
@@ -50,9 +54,9 @@ function astar(){
     
                 if(newPath){
                     switch(x){
-                        case 1: neighbor.h = heuristic(neighbor, end); break;
-                        case 2: neighbor.h = heuristic1(neighbor, end); break;
-                        case 3: neighbor.h = heuristic2(neighbor, end); break;
+                        case 1: neighbor.h = manhattan(neighbor, end); break;
+                        case 2: neighbor.h = euclide(neighbor, end); break;
+                        case 3: neighbor.h = diagonal(neighbor, end); break;
                     }
                     // console.log("Heuristic", neighbor.g, neighbor.h, "\n");
                     neighbor.f = neighbor.g + neighbor.h;
@@ -70,17 +74,17 @@ function astar(){
     } 
 }
 
-function heuristic(a, b){
+function manhattan(a, b){ //Mahattan Distant
     var d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
     return d;
 }
 
-function heuristic1(a, b){
+function euclide(a, b){ //Euclidean Distance
     var d = Math.sqrt(Math.abs(a.i - b.i)*Math.abs(a.i - b.i) + Math.abs(a.j - b.j)*Math.abs(a.j - b.j));
     return d;
 }
 
-function heuristic2(a, b){
+function diagonal(a, b){ // Diagonal Distance
     var d = Math.max(Math.abs(a.i - b.i) , Math.abs(a.j - b.j));
     return d;
 }

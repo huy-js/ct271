@@ -12,9 +12,9 @@ var path = []; //đường đi từ đầu đến đích
 function Spot(i ,j){
     this.i = i;
     this.j = j;
-    this.f = 0;
-    this.g = 0;
-    this.h = 0;
+    this.f = 0; //tổng của chiều dài từ điểm xuất phát đến đích qua nút đang xét
+    this.g = 0; //chiều dài đường đi từ điểm bắt đầu đến nút đang xét
+    this.h = 0; //chiều dài ước lượng từ điểm được duyệt hiện tại tới đích
     this.x = i;
     this.y = j;
     this.neighbors = []; //mảng chứa các neighbors 
@@ -325,7 +325,7 @@ function init(){
         alert("Vui long dien day du thong tin");
     }
 }
-
+ 
 function letGo(){
     openSet = [];
     closedSet = [];
@@ -352,6 +352,8 @@ function letGo(){
     document.getElementById("reGetStart").style.display = "none";
     document.getElementById("reGetEnd").style.display = "none";
     document.getElementById("start").style.display = "none";
+    document.getElementById("algorithm").disabled = true;
+    document.getElementById("astar1").disabled = true;
 }
 
 function reset(){
@@ -372,6 +374,9 @@ function reset(){
     document.getElementById("end-location").style.display = "none";
     document.getElementById("openSet").style.display = "none";
     document.getElementById("closedSet").style.display = "none";
+    document.getElementById("path-length").style.display = "none";
+    document.getElementById("weight").style.display = "none";
+    document.getElementById("algorithm").disabled = false;
     var canvas = document.getElementById("canvas");
     canvas.style.display = "none";
     ctx = canvas.getContext("2d");
@@ -411,6 +416,8 @@ function modify(){
     document.getElementById("getEnd").style.display = "none";
     document.getElementById("start1").style.display = "";
     document.getElementById("start2").style.display = "none";
+    document.getElementById("algorithm").disabled = false;
+    document.getElementById("astar1").disabled = false;
     
     // var canvas = document.getElementById("canvas");
     // ctx = canvas.getContext("2d");
